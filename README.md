@@ -10,7 +10,11 @@ A white, responsive inventory workspace for Qima Cafe Warren Street, with blue a
 
 ## Preview and hosting
 
-Open `index.html` in a browser. No build step or dependencies are required. The site is ready for GitHub Pages using the `main` branch and root folder; connection and publication remain pending.
+Open `index.html` in a browser. No build step or dependencies are required. Published through GitHub Pages from the `main` branch and root folder.
+
+Repository: https://github.com/Manish123-cmd/Warren_Street_System
+
+Live site: https://manish123-cmd.github.io/Warren_Street_System/
 
 The interface adapts to mobile screens, supports keyboard navigation and respects reduced-motion preferences.
 
