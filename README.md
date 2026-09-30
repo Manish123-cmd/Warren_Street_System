@@ -39,7 +39,7 @@ The stock page shows a delivery banner for the usual Tuesday, Thursday and Satur
 
 ## Daily proofer deductions
 
-`proofer.js` contains the supplied weekday/weekend quantities for all 15 pastries. Preparation uses tomorrow's baking date (Saturday/Sunday are weekends). The confirmed 30 September 2026 snapshot is exempt; deductions begin 1 October at 10 AM Europe/London. On opening the stock page, and every 30 seconds while it is open, due dates are processed once and stored. Unsaved edits and active scan reviews pause background processing. This browser-only app cannot run while closed; it catches up when reopened.
+`scripts/proofer.js` contains the supplied weekday/weekend quantities for all 15 pastries. Preparation uses tomorrow's baking date (Saturday/Sunday are weekends). The confirmed 30 September 2026 snapshot is exempt; deductions begin 1 October at 10 AM Europe/London. On opening the stock page, and every 30 seconds while it is open, due dates are processed once and stored. Unsaved edits and active scan reviews pause background processing. This browser-only app cannot run while closed; it catches up when reopened.
 
 Saved manual counts represent post-proofer quantities and are not deducted again that day. Unknown counts remain unknown. Insufficient stock is capped at zero with explicit shortage information. Existing saved dates are retained rather than recalculated when an older date is edited. The expandable Daily proofer quantities table displays the configured amounts.
 
@@ -48,3 +48,16 @@ Checks: `node --test tests/proofer.test.cjs tests/order-parser.test.cjs`.
 ## Setting Proover
 
 `setting-proover.html` provides ten searchable tray photo guides from the supplied Assets images. Each card lists the count and arrangement visible in its reference photo, with uncropped images and an accessible enlarged-photo dialog. These counts describe the photographs, not daily preparation totals or measured tray capacities. Red Croissants and Cruffins share one guide (6 croissants and 8 cruffins shown). Cookies and Pistachio Flan do not need tray guides. The page does not change stock or deduction settings.
+
+
+## Project layout
+
+- `index.html` ? workspace home page.
+- `frozen-pastries.html` ? stock inventory page.
+- `setting-proover.html` ? tray photo guides.
+- `scripts/` ? JavaScript behavior, stock data, scanning and preparation rules.
+- `styles/` ? shared styles and page-specific stylesheets.
+- `Assets/` ? logos and reference photos.
+- `tests/` ? stock-rule and order-parser checks.
+
+HTML pages stay at the root so existing GitHub Pages links continue to work. No build step is required.

@@ -1,6 +1,6 @@
-﻿const {test}=require('node:test');
+const {test}=require('node:test');
 const assert=require('node:assert/strict');
-const {parseOrder}=require('../order-parser.js');
+const {parseOrder}=require('../scripts/order-parser.js');
 const names=['Butter Croissant','Gianduja Bowtie','Pecan Cookie','Pistachio Cookie','Cruffin'];
 const example=`Order #33757382
 Delivery date 22/09/2026 10:00:00

@@ -1,4 +1,4 @@
-﻿const {test}=require('node:test');const assert=require('node:assert/strict');const {plan,catchUp,quantities}=require('../proofer.js');
+const {test}=require('node:test');const assert=require('node:assert/strict');const {plan,catchUp,quantities}=require('../scripts/proofer.js');
 const names=Object.keys(quantities);const seed={'2026-09-30':{counts:names.map(()=>100),afterProoferDeduction:true}};
 test('weekday and weekend baking dates',()=>{assert.equal(plan('2026-10-02',names).type,'Weekend');assert.equal(plan('2026-10-03',names).type,'Weekend');assert.equal(plan('2026-10-04',names).type,'Weekday');});
 test('today exempt, London 10AM boundary, repeat safe',()=>{assert.equal(catchUp(seed,names,new Date('2026-09-30T15:00Z')).changed,false);assert.equal(catchUp(seed,names,new Date('2026-10-01T08:59Z')).changed,false);const r=catchUp(seed,names,new Date('2026-10-01T09:00Z'));assert.equal(r.records['2026-10-01'].counts[0],88);assert.equal(catchUp(r.records,names,new Date('2026-10-01T12:00Z')).changed,false);});
