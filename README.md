@@ -61,3 +61,7 @@ Checks: `node --test tests/proofer.test.cjs tests/order-parser.test.cjs`.
 - `tests/` ? stock-rule and order-parser checks.
 
 HTML pages stay at the root so existing GitHub Pages links continue to work. No build step is required.
+
+## Wastage
+
+`wastage.html` records the front-of-house end-of-day report for all 15 pastries, with a London-calendar report date, optional reporter and notes. Unknown quantities stay blank and reports save as drafts; all 15 counts, including explicit zeros, are required for complete status. Saved reports can be reopened by date. Wastage uses separate browser storage (`warren-wastage-v1`) and never reduces frozen stock. This is manual report entry, not a shared submission system or an authenticated owner-only service.
