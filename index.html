@@ -1,26 +1,37 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Qima Cafe Warren Street — website coming soon.">
-    <title>Qima Cafe Warren Street</title>
-    <style>
-      * { box-sizing: border-box; }
-      body { margin: 0; min-height: 100vh; display: grid; place-items: center; padding: 24px; background: #f6f1e8; color: #34251d; font-family: Georgia, serif; }
-      main { width: 100%; max-width: 720px; text-align: center; padding: 64px 24px; }
-      .eyebrow { font: 12px/1.5 Arial, sans-serif; letter-spacing: .24em; text-transform: uppercase; }
-      h1 { font-size: clamp(40px, 9vw, 80px); font-weight: 400; line-height: 1.1; margin: 24px 0; }
-      p { font-size: 20px; line-height: 1.6; }
-      .status { display: inline-block; margin-top: 24px; border: 1px solid #86715d; padding: 10px 20px; border-radius: 24px; font: 14px/1.5 Arial, sans-serif; }
-    </style>
-  </head>
-  <body>
-    <main>
-      <p class="eyebrow">Warren Street</p>
-      <h1>Qima Cafe</h1>
-      <p>Our website is coming soon.</p>
-      <span class="status">Something new is brewing</span>
-    </main>
-  </body>
+<head>
+<meta charset="utf-8">
+<link rel="icon" type="image/jpeg" href="Assets/Qima_Logo.jpeg">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#ffffff">
+<meta name="description" content="Warren Street System. Your cafe inventory workspace.">
+<title>Overview | Warren_Street_System</title>
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="polish.css">
+<script src="app.js" defer></script>
+</head>
+<body class="overview-screen">
+<aside class="sidebar">
+<a class="brand" href="index.html"><img class="brand-logo" src="Assets/Qima_Logo.jpeg" alt="Qima logo" width="48" height="48"><span>QIMA<span class="brand-sub">WARREN STREET SYSTEM</span></span></a>
+<p class="nav-label">WORKSPACE</p>
+<nav aria-label="Main navigation">
+<a class="nav-item active" aria-current="page" href="index.html"><span aria-hidden="true">&#9638;</span> Overview</a>
+<a class="nav-item "  href="frozen-pastries.html"><span aria-hidden="true">&#10052;</span> Frozen Pastries Stock</a>
+<div class="nav-item unavailable"><span aria-hidden="true">&#9684;</span> Creams Stock <small>Soon</small></div>
+<a class="nav-item" href="setting-proover.html"><span aria-hidden="true">&#9636;</span> Setting Proover</a>
+</nav>
+<div class="sidebar-note"><span>THE DAILY RITUAL</span><p>A little care.<br>A better day.</p><small>Prepared with purpose, every morning.</small></div><div class="location-card"><span class="location-icon" aria-hidden="true">Q</span><div><strong>Warren Street</strong><span>Qima Cafe</span></div></div>
+</aside>
+<div class="app-shell">
+<header class="topbar"><span>Workspace <span class="slash">/</span> <strong>Overview</strong></span><span class="location-pill"><span class="green-dot"></span> Warren Street</span></header>
+<main><div class="page-heading"><div><p class="eyebrow">YOUR DAILY WORKSPACE</p><h1>Your kitchen, in good hands.</h1><p class="subtitle">A clearer view of your kitchen, starting with your stock.</p></div><span class="badge">Qima Cafe</span></div>
+<section class="hero" aria-label="Welcome to your workspace"><div class="hero-copy"><span class="hero-label">A LITTLE MORE ORGANISED</span><h2>A fresh start.<br><em>Every single day.</em></h2><p>Keep your pastries in view and your daily prep on track. Your Warren Street workspace starts here.</p><a class="button" href="frozen-pastries.html">View frozen stock <span aria-hidden="true">&rarr;</span></a></div><div class="hero-photo"><img src="Assets/Wallpaper.jpeg" alt="The Warren Street cafe with red awnings"><span class="photo-label">WARREN STREET &nbsp; / &nbsp; OUR LITTLE CORNER OF LONDON</span></div></section>
+<section class="metrics" aria-label="Workspace overview"><div class="metric"><span>Pastries listed</span><strong>15 <small>items</small></strong><p>Your frozen pastry range</p></div><div class="metric"><span>Daily preparation</span><strong>10:00 <small>AM</small></strong><p>Proofer schedule &middot; London time</p></div><div class="metric"><span>Delivery mornings</span><strong class="delivery-metric">Tue &middot; Thu &middot; Sat</strong><p>Scan your delivery paper on arrival</p></div></section>
+<div class="section-heading"><h2>Your everyday essentials</h2><span>One workspace. Your daily essentials.</span></div>
+<section class="service-grid" aria-label="Workspace services"><a class="service-card" href="frozen-pastries.html"><div class="card-top"><span class="service-icon" aria-hidden="true">&#10052;</span><span class="badge blue">Available</span></div><h3>Frozen Pastries Stock</h3><p>All your pastries, together. Check the range and see your stock quantities.</p><div class="card-bottom"><span>15 pastries</span><strong>Open inventory &rarr;</strong></div></a><article class="service-card muted"><div class="card-top"><span class="service-icon" aria-hidden="true">&#9684;</span><span class="badge">Coming soon</span></div><h3>Creams Stock</h3><p>A place for your cream essentials and the quantities you have on hand.</p><div class="card-bottom"><span>Next in your workspace</span></div></article><a class="service-card" href="setting-proover.html"><div class="card-top"><span class="service-icon" aria-hidden="true">&#9636;</span><span class="badge blue">Available</span></div><h3>Setting Proover</h3><p>Follow the real tray photos. Get the arrangement, count and spacing right before proofing.</p><div class="card-bottom"><span>10 photo guides</span><strong>View tray guides &rarr;</strong></div></a></section>
+<div class="loading-status" role="status"><span class="spinner" aria-hidden="true"></span><span id="status-text">Preparing your workspace...</span></div></main>
+<footer><span>Warren Street System</span><span>Made for the everyday.</span></footer>
+</div>
+</body>
 </html>
