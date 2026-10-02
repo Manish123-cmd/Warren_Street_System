@@ -35,7 +35,7 @@
     }
   }
   function applyDue() {
-    const result = ProoferSchedule.catchUp(records, names);
+    const result = ProoferSchedule.catchUp(records, names, new Date(), window.CONFIRMED_DELIVERIES || []);
     if (result.changed) {
       if ((localStorage.getItem(key) || '') !== baseline) throw Error('Stock changed in another tab');
       const serialized = JSON.stringify(result.records);

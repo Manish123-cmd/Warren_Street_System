@@ -21,3 +21,17 @@ window.CONFIRMED_STOCK = {
     'Pecan Cookie': 50
   }
 };
+
+// Delivery received 1 October; quantities are individual pastries, not boxes.
+window.CONFIRMED_DELIVERIES = [{
+  id: '2026-10-01-received-1',
+  date: '2026-10-01',
+  quantities: {
+    'Butter Croissant': 50,
+    'Pain au Chocolat': 25,
+    'Labneh Twist': 50,
+    'Cinnamon Bun': 50,
+    'Pistachio Flan': 25,
+    'Strawberry & Lemon Verbena Danish': 25
+  }
+}];

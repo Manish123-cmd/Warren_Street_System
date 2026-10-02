@@ -6,7 +6,7 @@ A white, responsive inventory workspace for Qima Cafe Warren Street, with blue a
 
 - `index.html`: workspace overview, service cards and opening loading indicator.
 - `frozen-pastries.html`: all 15 supplied pastry names, live search and an empty-results state. Quantities remain pending and are shown as a dash, not zero.
-- Creams Stock and TrayUp Details are marked coming soon.
+- `creams.html`: cream recipes and preparation steps, starting with Whipped White Chocolate Ganache (1,174 g whipping cream, 80 g gelatine mass and 250 g white chocolate).
 
 ## Preview and hosting
 
@@ -45,6 +45,8 @@ Saved manual counts represent post-proofer quantities and are not deducted again
 
 Checks: `node --test tests/proofer.test.cjs tests/order-parser.test.cjs`.
 
+The confirmed 1 October 2026 delivery in `scripts/initial-stock.js` adds 50 butter croissants, 25 pain au chocolat, 50 labneh twists, 50 cinnamon buns, 25 pistachio flans and 25 strawberry & lemon verbena Danish pastries. Cannelé, almond croissants and frangipane are excluded. Opening the stock page applies the delivery once per browser and recalculates affected automatic preparation snapshots, including previously capped shortages. Later manual stock counts remain authoritative. Receipt IDs are saved with the delivery day's record to prevent duplicate additions.
+
 ## Setting Proover
 
 `setting-proover.html` provides ten searchable tray photo guides from the supplied Assets images. Each card lists the count and arrangement visible in its reference photo, with uncropped images and an accessible enlarged-photo dialog. These counts describe the photographs, not daily preparation totals or measured tray capacities. Red Croissants and Cruffins share one guide (6 croissants and 8 cruffins shown). Cookies and Pistachio Flan do not need tray guides. The page does not change stock or deduction settings.
@@ -63,5 +65,9 @@ Checks: `node --test tests/proofer.test.cjs tests/order-parser.test.cjs`.
 HTML pages stay at the root so existing GitHub Pages links continue to work. No build step is required.
 
 ## Wastage
+
+The weekly receiving panel combines confirmed deliveries with advance orders from `scripts/weekly-orders.js`. Advance orders use unique IDs, expected delivery dates, supplier names, status and individual pastry quantities; pending orders never increase stock. When confirming receipt, use the same ID in `CONFIRMED_DELIVERIES` to avoid counting the order twice. The purple/lilac chart compares ordered units with estimated sales by pastry. Sales estimates use saved automatic preparation for the baking date, adjusted for shortages, minus reported wastage. Missing data stays unknown and each product shows coverage out of seven days; these are estimates, not till sales. The existing daily wastage chart remains below the comparison.
+
+Weekly records run Monday through Sunday and show saved daily totals, draft/complete status and a weekly total of known quantities. Use Previous week / Next week to browse retained history, or select a day to edit its report. Yesterday opens the previous London calendar date. Missing reports and unknown quantities are not treated as zero; weekly totals exclude unsaved edits. Records stay in browser storage across week changes.
 
 `wastage.html` records the front-of-house end-of-day report for all 15 pastries, with a London-calendar report date, optional reporter and notes. Unknown quantities stay blank and reports save as drafts; all 15 counts, including explicit zeros, are required for complete status. Saved reports can be reopened by date. Wastage uses separate browser storage (`warren-wastage-v1`) and never reduces frozen stock. This is manual report entry, not a shared submission system or an authenticated owner-only service.

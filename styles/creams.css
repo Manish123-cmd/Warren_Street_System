@@ -1,0 +1,19 @@
+.cream-recipe { border:1px solid var(--line);border-radius:18px;background:#fff;overflow:hidden; }
+.cream-recipe + .cream-recipe { margin-top:24px; }
+.cream-recipe-heading { padding:30px;background:linear-gradient(120deg,#fff8ec,#fff);border-bottom:1px solid var(--line); }
+.cream-recipe-heading h2 { margin:10px 0;font:clamp(26px,4vw,38px)/1.2 Georgia,serif;color:var(--ink); }
+.cream-recipe-heading p:last-child { color:var(--muted);font-size:14px;line-height:1.7; }
+.cream-recipe-grid { display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr); }
+.cream-ingredients,.cream-method { padding:30px;min-width:0; }
+.cream-ingredients { border-right:1px solid var(--line); }
+.cream-recipe h3 { margin:0 0 22px;font-size:18px; }
+.cream-ingredients table { width:100%;border-collapse:collapse;font-size:14px; }
+.cream-ingredients th,.cream-ingredients td { padding:16px 0;text-align:left;border-bottom:1px solid var(--line);white-space:normal; }
+.cream-ingredients th { font-weight:500; }
+.cream-ingredients td,.cream-ingredients thead th:last-child { text-align:right;white-space:nowrap; }
+.cream-total { display:flex;justify-content:space-between;gap:16px;color:var(--muted);font-size:13px;margin-top:22px; }
+.cream-total strong { white-space:nowrap;color:var(--ink); }
+.cream-method ol { padding-left:24px;margin:0; }
+.cream-method li { padding-left:10px;margin-bottom:20px;font-size:15px;line-height:1.8;color:var(--ink); }
+.cream-method li::marker { color:#806343;font-weight:600; }
+@media(max-width:800px) { .cream-recipe-grid { grid-template-columns:1fr; }.cream-ingredients { border-right:0;border-bottom:1px solid var(--line); }.cream-recipe-heading,.cream-ingredients,.cream-method { padding:22px; } }
