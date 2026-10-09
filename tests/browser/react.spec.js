@@ -50,3 +50,20 @@ test('confirmed wastage loads and later edits persist across refresh', async ({ 
   await page.locator('#waste-date').dispatchEvent('change');
   await expect(page.locator('#waste-total')).toHaveText('11');
 });
+
+test('October 7 report includes almond croissant in daily and weekly totals', async ({ page }) => {
+  await page.goto('/wastage.html');
+  await expect(page.locator('main .order-alert')).toHaveCount(1);
+  await page.locator('#waste-date').fill('2026-10-07');
+  await page.locator('#waste-date').dispatchEvent('change');
+  await expect(page.locator('#waste-total')).toHaveText('10');
+  await expect(page.locator('#almond-waste')).toHaveValue('1');
+  await expect(page.locator('#waste-week-summary')).toContainText('25 pastries recorded');
+  await page.locator('#save-wastage').click();
+  await page.reload();
+  await expect(page.locator('main .order-alert')).toHaveCount(1);
+  await page.locator('#waste-date').fill('2026-10-07');
+  await page.locator('#waste-date').dispatchEvent('change');
+  await expect(page.locator('#waste-total')).toHaveText('10');
+  await expect(page.locator('#almond-waste')).toHaveValue('1');
+});

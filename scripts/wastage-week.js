@@ -9,9 +9,9 @@
     const start = offset(date, -((day + 6) % 7));
     const days = Array.from({length: 7}, (_, i) => {
       const date = offset(start, i), report = reports[date];
-      const known = report ? report.counts.filter(n => n !== null) : [];
+      const known = report ? [...report.counts,...Object.values(report.extraCounts || {})].filter(n => n !== null) : [];
       return {date, total: known.length ? known.reduce((a,b) => a+b,0) : null,
-        state: !report ? 'Not recorded' : report.counts.every(n => n !== null) ? 'Complete' : 'Draft'};
+        state: !report ? 'Not recorded' : [...report.counts,...Object.values(report.extraCounts || {})].every(n => n !== null) ? 'Complete' : 'Draft'};
     });
     const totals = days.filter(day => day.total !== null);
     return {start, end: offset(start,6), days,

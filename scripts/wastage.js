@@ -1,10 +1,10 @@
 (() => {
  const $=id=>document.getElementById(id), key='warren-wastage-v1';
- const inputs=[...document.querySelectorAll('.waste-count')];
+ const inputs=[...document.querySelectorAll('.waste-count')], almond=$('almond-waste');
  const today=()=>new Intl.DateTimeFormat('en-CA',{timeZone:'Europe/London',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());
  let reports={},baseline='',current=today(),dirty=false,blocked=false;
  try {baseline=localStorage.getItem(key)||'';reports=baseline?JSON.parse(baseline):{};
-  if(!reports||Array.isArray(reports)||typeof reports!=='object'||Object.values(reports).some(r=>!r||!Array.isArray(r.counts)||r.counts.length!==15||r.counts.some(n=>n!==null&&(!Number.isInteger(n)||n<0||n>999999))||typeof r.reporter!=='string'||typeof r.notes!=='string'))throw Error();
+  if(!reports||Array.isArray(reports)||typeof reports!=='object'||Object.values(reports).some(r=>!r||!Array.isArray(r.counts)||r.counts.length!==15||r.counts.some(n=>n!==null&&(!Number.isInteger(n)||n<0||n>999999))||typeof r.reporter!=='string'||typeof r.notes!=='string'||(r.extraCounts!==undefined&&(!r.extraCounts||typeof r.extraCounts!=='object'||Array.isArray(r.extraCounts)||Object.values(r.extraCounts).some(n=>n!==null&&(!Number.isInteger(n)||n<0||n>999999))))))throw Error();
   // User-confirmed daily reports. Apply each revision once; retain later edits.
   // Counts follow the pastry order in wastage.html; unlisted items are zero.
   const confirmedReports=[
@@ -14,20 +14,21 @@
    {date:'2026-10-04',revision:'2026-10-04-wastage-1',counts:[0,0,7,0,0,3,0,3,5,0,0,0,0,1,0]},
    {date:'2026-10-05',revision:'2026-10-05-zero-wastage-1',counts:Array(15).fill(0),notes:'Confirmed no wastage.'},
    {date:'2026-10-06',revision:'2026-10-06-wastage-1',counts:[0,0,0,0,0,1,2,0,0,0,1,1,0,0,0],notes:'Cruffin wastage: 1 blackberry cruffin.'},
+   {date:'2026-10-07',revision:'2026-10-07-wastage-1',counts:[3,1,0,0,0,0,1,1,0,1,0,2,0,0,0],extraCounts:{'Almond Croissant':1}},
    {date:'2026-10-08',revision:'2026-10-08-wastage-1',counts:[0,0,0,2,4,2,0,0,2,0,0,0,0,0,0],notes:'Croissant twists recorded under Labneh Twist.'}
   ];
   let updated=false;
-  for(const {date,revision,counts,notes} of confirmedReports){
+  for(const {date,revision,counts,notes,extraCounts} of confirmedReports){
    if(reports[date]?.confirmedRevision===revision)continue;
-   reports={...reports,[date]:{...reports[date],counts,reporter:reports[date]?.reporter||'',notes:reports[date]?.notes||notes||'',savedAt:new Date().toISOString(),confirmedRevision:revision}};
+   reports={...reports,[date]:{...reports[date],counts,...(extraCounts?{extraCounts}:{}),reporter:reports[date]?.reporter||'',notes:reports[date]?.notes||notes||'',savedAt:new Date().toISOString(),confirmedRevision:revision}};
    updated=true;
   }
   if(updated){
    const serialized=JSON.stringify(reports);localStorage.setItem(key,serialized);baseline=serialized;
   }
  }catch{blocked=true;$('save-wastage').disabled=true;}
- function summary(){const values=inputs.filter(i=>i.value!==''&&i.validity.valid).map(i=>Number(i.value));$('waste-total').textContent=values.length?values.reduce((a,b)=>a+b,0).toLocaleString():'—';$('waste-counted').textContent=`${values.length} / 15`;}
- function load(date){current=date;$('waste-date').value=date;const report=reports[date];inputs.forEach((input,i)=>input.value=report?.counts[i]??'');$('reported-by').value=report?.reporter||'';$('waste-notes').value=report?.notes||'';dirty=false;summary();week();$('waste-state').textContent=report?(report.counts.every(n=>n!==null)?'Complete':'Draft'):'Not recorded';$('waste-status').textContent=blocked?'Storage unavailable. Saving is disabled to protect your data.':report?`Saved report for ${date}.`:'No report saved for this date.';}
+ function summary(){const values=[...inputs,almond].filter(i=>i.value!==''&&i.validity.valid).map(i=>Number(i.value));$('waste-total').textContent=values.length?values.reduce((a,b)=>a+b,0).toLocaleString():'—';$('waste-counted').textContent=`${inputs.filter(i=>i.value!==''&&i.validity.valid).length} / 15`;}
+ function load(date){current=date;$('waste-date').value=date;const report=reports[date];almond.value=report?.extraCounts?.['Almond Croissant']??0;inputs.forEach((input,i)=>input.value=report?.counts[i]??'');$('reported-by').value=report?.reporter||'';$('waste-notes').value=report?.notes||'';dirty=false;summary();week();$('waste-state').textContent=report?([...report.counts,...Object.values(report.extraCounts||{})].every(n=>n!==null)?'Complete':'Draft'):'Not recorded';$('waste-status').textContent=blocked?'Storage unavailable. Saving is disabled to protect your data.':report?`Saved report for ${date}.`:'No report saved for this date.';}
  let displayedWeek;
  function week(date=current){
   const result=WastageWeek.summarize(date,reports);displayedWeek=result.start;
@@ -62,14 +63,14 @@
   $('waste-next-week').disabled=false;
  }
  function changed(){dirty=true;summary();$('waste-state').textContent='Unsaved';$('waste-status').textContent='Unsaved changes. Select Save report to keep them.';}
- inputs.forEach(i=>i.addEventListener('input',changed));$('reported-by').addEventListener('input',changed);$('waste-notes').addEventListener('input',changed);
+ inputs.forEach(i=>i.addEventListener('input',changed));almond.addEventListener('input',changed);$('reported-by').addEventListener('input',changed);$('waste-notes').addEventListener('input',changed);
  function select(date){if(!date||date>today()){ $('waste-date').value=current;return;}if(dirty&&!confirm('Discard unsaved changes and switch date?')){$('waste-date').value=current;return;}load(date);}
  $('waste-date').max=today();$('waste-date').addEventListener('change',()=>select($('waste-date').value));$('waste-today').addEventListener('click',()=>{$('waste-date').max=today();select(today());});
  $('fill-zero').addEventListener('click',()=>{inputs.filter(i=>i.value===''&&!i.validity.badInput).forEach(i=>i.value='0');changed();});
  $('waste-form').addEventListener('submit',event=>{event.preventDefault();if(blocked)return;
  try{if((localStorage.getItem(key)||'')!==baseline){$('waste-status').textContent='Another tab changed the reports. Reload before saving; your edits have not been saved.';return;}
- const record={...reports[current],counts:inputs.map(i=>i.value===''?null:Number(i.value)),reporter:$('reported-by').value.trim(),notes:$('waste-notes').value.trim(),savedAt:new Date().toISOString()};
- const next={...reports,[current]:record},serialized=JSON.stringify(next);localStorage.setItem(key,serialized);reports=next;baseline=serialized;load(current);$('waste-status').textContent=record.counts.every(n=>n!==null)?`Complete report saved for ${current}.`:`Draft saved for ${current}. Fill the remaining quantities to complete the report.`;
+ const record={...reports[current],counts:inputs.map(i=>i.value===''?null:Number(i.value)),extraCounts:{...reports[current]?.extraCounts,'Almond Croissant':almond.value===''?null:Number(almond.value)},reporter:$('reported-by').value.trim(),notes:$('waste-notes').value.trim(),savedAt:new Date().toISOString()};
+ const next={...reports,[current]:record},serialized=JSON.stringify(next);localStorage.setItem(key,serialized);reports=next;baseline=serialized;load(current);$('waste-status').textContent=[...record.counts,...Object.values(record.extraCounts||{})].every(n=>n!==null)?`Complete report saved for ${current}.`:`Draft saved for ${current}. Fill the remaining quantities to complete the report.`;
  }catch{$('waste-status').textContent='Could not save. Your edits are still here; check browser storage and try again.';}});
  $('waste-yesterday').addEventListener('click',()=>select(WastageWeek.offset(today(),-1)));
  $('waste-prev-week').addEventListener('click',()=>week(WastageWeek.offset(displayedWeek,-7)));
