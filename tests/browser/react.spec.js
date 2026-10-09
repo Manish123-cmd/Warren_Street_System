@@ -67,3 +67,25 @@ test('October 7 report includes almond croissant in daily and weekly totals', as
   await expect(page.locator('#waste-total')).toHaveText('10');
   await expect(page.locator('#almond-waste')).toHaveValue('1');
 });
+
+test('receiving an order updates totals and alerts, persists, and can be undone', async ({ page }) => {
+  await page.clock.setFixedTime(new Date('2026-10-09T12:00:00Z'));
+  await page.goto('/orders.html');
+  await expect(page.locator('main .order-alert')).toHaveCount(1);
+  const button=page.getByRole('button', { name: /Mark as received for order/ }).filter({ visible: true }).first();
+  const label=await button.getAttribute('aria-label');
+  const orderNumber=label.match(/for order (\S+) on/)[1];
+  const before=Number((await page.locator('#orders-pending').textContent()).replaceAll(',', ''));
+  const stock=await page.evaluate(() => localStorage.getItem('warren-stock-v1'));
+  await button.click();
+  await expect(page.locator('#receipt-status')).toHaveText('Order marked as received.');
+  expect(Number((await page.locator('#orders-pending').textContent()).replaceAll(',', ''))).toBeLessThan(before);
+  await expect(page.locator('main .order-alert')).not.toContainText(`Order ${orderNumber}`);
+  const undo=page.getByRole('button', { name: new RegExp(`Undo received for order ${orderNumber} on`) });
+  await expect(undo).toBeVisible();
+  await page.reload();
+  await expect(undo).toBeVisible();
+  expect(await page.evaluate(() => localStorage.getItem('warren-stock-v1'))).toBe(stock);
+  await undo.click();
+  await expect(page.locator('#orders-pending')).toHaveText(before.toLocaleString('en-GB'));
+});

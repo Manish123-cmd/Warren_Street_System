@@ -3,8 +3,9 @@
  const panel=document.createElement('aside');panel.className='order-alert';panel.setAttribute('role','status');main.prepend(panel);
  function refresh(){
   const today=new Intl.DateTimeFormat('en-CA',{timeZone:'Europe/London',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());
-  const receipts=new Set((window.CONFIRMED_DELIVERIES||[]).map(order=>order.id));
-  const pending=(window.ADVANCE_ORDERS||[]).filter(order=>order.status!=='received'&&!receipts.has(order.id)).sort((a,b)=>a.date.localeCompare(b.date));
+  let orders;
+  try{orders=OrderReceipts.orders();}catch{panel.hidden=false;panel.textContent='Delivery receipt status unavailable. Refresh to try again.';return;}
+  const pending=orders.filter(order=>order.status!=='received').sort((a,b)=>a.date.localeCompare(b.date));
   const due=pending.filter(order=>order.date===today),overdue=pending.filter(order=>order.date<today);
   const selected=due.length?due:overdue.length?overdue:pending.slice(0,1);
   panel.hidden=!selected.length;panel.classList.toggle('due',!!(due.length||overdue.length));panel.replaceChildren();
@@ -13,5 +14,5 @@
   selected.forEach(order=>{const text=document.createElement('p');text.textContent=`${order.supplier} · Order ${order.orderNumber} · ${order.date} at ${order.time} (London time)`;panel.append(text);});
   const link=document.createElement('a');link.href='orders.html#receiving-title';link.textContent='View incoming orders';panel.append(link);
  }
- refresh();setInterval(refresh,60000);document.addEventListener('visibilitychange',()=>{if(!document.hidden)refresh();});
+ refresh();setInterval(refresh,60000);window.addEventListener('storage',refresh);window.addEventListener('order-receipts-changed',refresh);document.addEventListener('visibilitychange',()=>{if(!document.hidden)refresh();});
 })();

@@ -14,8 +14,9 @@
  }
  function orderChart(week){
 
-  const receipts=(window.CONFIRMED_DELIVERIES||[]).map(d=>({...d,status:'received'}));
-  const orders=[...receipts,...(window.ADVANCE_ORDERS||[]).filter(d=>!receipts.some(r=>r.id===d.id))];
+  let orders;
+  try{orders=OrderReceipts.orders();}
+  catch{$('receiving-list').textContent='Receipt storage unavailable. Refresh before changing delivery status.';return;}
   let stock={},unavailable=false;
   try{stock=JSON.parse(localStorage.getItem('warren-stock-v1')||'{}');if(!stock||Array.isArray(stock)||typeof stock!=='object')throw Error();}catch{stock={};unavailable=true;}
   let data;
@@ -38,6 +39,17 @@
    info.append(name,detail);
    const status=document.createElement('span');status.className='incoming-status'+(order.status==='received'?' received':'');status.textContent=order.status==='received'?'Received':'To be received';
    row.append(date,info,status);
+   if(!order.confirmed){
+    const button=document.createElement('button');button.type='button';button.className='button secondary incoming-pdf';
+    button.textContent=order.status==='received'?'Undo received':'Mark as received';
+    button.setAttribute('aria-label',button.textContent+' for order '+order.orderNumber+' on '+order.date);
+    button.disabled=order.status!=='received'&&order.date>today();
+    button.addEventListener('click',()=>{
+     try{OrderReceipts.setReceived(order.id,order.status!=='received');$('receipt-status').textContent=order.status==='received'?'Order marked as pending.':'Order marked as received.';}
+     catch{$('receipt-status').textContent='Could not save receipt status. Please check browser storage and try again.';}
+    });
+    row.append(button);
+   }
    if(order.sourceFile){const pdf=document.createElement('a');pdf.href='Assets/orders/'+encodeURIComponent(order.sourceFile);pdf.target='_blank';pdf.rel='noopener';pdf.textContent='Open PDF';pdf.className='button secondary incoming-pdf';pdf.setAttribute('aria-label','Open PDF for order '+order.orderNumber+' on '+order.date);row.append(pdf);}
    list.append(row);
   });
@@ -64,6 +76,7 @@
  $('orders-next-week').addEventListener('click',()=>{current=WastageWeek.offset(current,7);render();});
  $('orders-this-week').addEventListener('click',()=>{current=today();render();});
  window.addEventListener('storage',render);
+ window.addEventListener('order-receipts-changed',render);
  document.addEventListener('visibilitychange',()=>{if(!document.hidden)render();});
  render();
 })();

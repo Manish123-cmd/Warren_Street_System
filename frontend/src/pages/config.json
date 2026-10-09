@@ -8,6 +8,7 @@
       "scripts/app.js",
       "scripts/initial-stock.js",
       "scripts/weekly-orders.js",
+      "scripts/order-receipts.js",
       "scripts/order-alerts.js"
     ]
   },
@@ -24,6 +25,7 @@
       "scripts/stock.js",
       "scripts/delivery.js",
       "scripts/weekly-orders.js",
+      "scripts/order-receipts.js",
       "scripts/order-alerts.js"
     ]
   },
@@ -35,6 +37,7 @@
     "scripts": [
       "scripts/initial-stock.js",
       "scripts/weekly-orders.js",
+      "scripts/order-receipts.js",
       "scripts/order-alerts.js"
     ]
   },
@@ -47,6 +50,7 @@
       "scripts/tray-guide.js",
       "scripts/initial-stock.js",
       "scripts/weekly-orders.js",
+      "scripts/order-receipts.js",
       "scripts/order-alerts.js"
     ]
   },
@@ -58,6 +62,7 @@
     "scripts": [
       "scripts/initial-stock.js",
       "scripts/weekly-orders.js",
+      "scripts/order-receipts.js",
       "scripts/wastage-week.js",
       "scripts/wastage.js",
       "scripts/order-alerts.js"
@@ -71,6 +76,7 @@
     "scripts": [
       "scripts/initial-stock.js",
       "scripts/weekly-orders.js",
+      "scripts/order-receipts.js",
       "scripts/sales-summary.js",
       "scripts/wastage-week.js",
       "scripts/orders.js",

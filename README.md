@@ -77,3 +77,7 @@ The weekly receiving panel combines confirmed deliveries with advance orders fro
 Weekly records run Monday through Sunday and show saved daily totals, draft/complete status and a weekly total of known quantities. Use Previous week / Next week to browse retained history, or select a day to edit its report. Yesterday opens the previous London calendar date. Missing reports and unknown quantities are not treated as zero; weekly totals exclude unsaved edits. Records stay in browser storage across week changes.
 
 `wastage.html` records the front-of-house end-of-day report for all 15 pastries, with a London-calendar report date, optional reporter and notes. Unknown quantities stay blank and reports save as drafts; all 15 counts, including explicit zeros, are required for complete status. Saved reports can be reopened by date. Wastage uses separate browser storage (`warren-wastage-v1`) and never reduces frozen stock. This is manual report entry, not a shared submission system or an authenticated owner-only service.
+
+## Receiving orders
+
+Orders & Sales offers Mark as received for pending deliveries due today or earlier, plus Undo received for browser-confirmed receipts. Status saves in `warren-order-receipts-v1`, updates weekly receiving totals and delivery alerts, and syncs across tabs on the same browser. Confirmed deliveries already included in stock data cannot be undone here. This status action does not add frozen stock; record the stock receipt separately.
