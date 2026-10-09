@@ -18,7 +18,7 @@
     const data = baseline ? JSON.parse(baseline) : {};
     if (!data || Array.isArray(data) || typeof data !== 'object' || Object.entries(data).some(([date, record]) => !/^\d{4}-\d{2}-\d{2}$/.test(date) || !Array.isArray(record.counts) || record.counts.length !== names.length || !record.counts.every(validCount))) throw Error('Invalid saved stock');
     records = data;
-    const confirmed = window.CONFIRMED_STOCK;
+    for(const confirmed of [...(window.CONFIRMED_STOCK_HISTORY||[]),window.CONFIRMED_STOCK]) {
     if (confirmed && records[confirmed.date]?.confirmedRevision !== confirmed.revision) {
       const counts = names.map(name => confirmed.quantities[name]);
       if (!counts.every(value => Number.isInteger(value) && validCount(value))) throw Error('Invalid confirmed stock');
@@ -34,8 +34,9 @@
       baseline = updated;
     }
   }
+  }
   function applyDue() {
-    const result = ProoferSchedule.catchUp(records, names, new Date(), window.CONFIRMED_DELIVERIES || []);
+    const result = ProoferSchedule.catchUp(records, names, new Date(), window.OrderReceipts ? OrderReceipts.deliveries() : window.CONFIRMED_DELIVERIES || []);
     if (result.changed) {
       if ((localStorage.getItem(key) || '') !== baseline) throw Error('Stock changed in another tab');
       const serialized = JSON.stringify(result.records);
@@ -70,7 +71,9 @@
     $('save-status').textContent = blocked ? 'Storage unavailable. Saving is disabled.' : records[date] ? `Saved stock for ${date}.${records[date].afterProoferDeduction ? ' Already counted after proofer preparation; no further deduction for this date.' : ''}` : prior ? `Starting with stock saved on ${prior}. Save to record it for ${date}.` : `No earlier saved stock. Enter your first counts for ${date}.`;
     const prep = ProoferSchedule.plan(date, names);
     const shortages = records[date]?.shortages || [];
-    $('proofer-status').textContent = records[date]?.automaticDeduction
+    $('proofer-status').textContent = records[date]?.awaitingPreparation
+      ? 'Delivery added to stock. Preparation will be deducted at 10 AM London time.'
+      : records[date]?.automaticDeduction
       ? `10 AM preparation recorded for ${prep.bakingDate} (${prep.type.toLowerCase()}).` + (shortages.length ? ' Short stock: ' + shortages.map(s=>`${s.name}: ${s.missing} short`).join('; ') + '. Check your actual counts.' : '')
       : records[date]?.afterProoferDeduction ? 'This stock is already after proofer preparation. No further deduction for this date.'
       : `At 10 AM London time: ${prep.type.toLowerCase()} quantities for the bake on ${prep.bakingDate}.`;

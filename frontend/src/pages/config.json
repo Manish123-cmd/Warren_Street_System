@@ -21,11 +21,11 @@
       "scripts/app.js",
       "scripts/order-parser.js",
       "scripts/initial-stock.js",
+      "scripts/weekly-orders.js",
+      "scripts/order-receipts.js",
       "scripts/proofer.js",
       "scripts/stock.js",
       "scripts/delivery.js",
-      "scripts/weekly-orders.js",
-      "scripts/order-receipts.js",
       "scripts/order-alerts.js"
     ]
   },

@@ -81,3 +81,5 @@ Weekly records run Monday through Sunday and show saved daily totals, draft/comp
 ## Receiving orders
 
 Orders & Sales offers Mark as received for pending deliveries due today or earlier, plus Undo received for browser-confirmed receipts. Status saves in `warren-order-receipts-v1`, updates weekly receiving totals and delivery alerts, and syncs across tabs on the same browser. Confirmed deliveries already included in stock data cannot be undone here. This status action does not add frozen stock; record the stock receipt separately.
+
+The confirmed 9 October stock is after Friday preparation for Saturday baking. Scheduled deliveries are expected at 08:00 London time. Receipts confirmed from 10 October onward feed frozen stock once per order ID when the stock page opens, including before the normal 10:00 preparation deduction. Earlier receipt statuses do not add quantities already covered by the confirmed baseline. Stock-linked receipts cannot be undone through the status control.

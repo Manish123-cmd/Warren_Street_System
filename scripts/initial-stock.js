@@ -1,5 +1,5 @@
 ﻿// Confirmed stock remaining after proofer preparation. These are individual pastries.
-window.CONFIRMED_STOCK = {
+window.CONFIRMED_STOCK_HISTORY = [ {
   date: '2026-09-30',
   revision: '2026-09-30-confirmed-stock-1',
   afterProoferDeduction: true,
@@ -19,6 +19,30 @@ window.CONFIRMED_STOCK = {
     'Dark Chocolate Cookie': 50,
     'Pistachio Cookie': 2,
     'Pecan Cookie': 50
+  }
+}];
+
+// Friday count after preparing pastries for Saturday, before Saturday delivery.
+window.CONFIRMED_STOCK = {
+  date: '2026-10-09',
+  revision: '2026-10-09-after-saturday-preparation-1',
+  afterProoferDeduction: true,
+  quantities: {
+    'Butter Croissant': 32,
+    'Pain au Chocolat': 34,
+    'Gianduja Bowtie': 25,
+    'Labneh Twist': 23,
+    'Cinnamon Bun': 32,
+    'Yemeny Honey Brioche': 18,
+    'Adani Chai Bun': 13,
+    'Pistachio Flan': 26,
+    'Olive & Goat Cheese Suisse': 24,
+    'Strawberry & Lemon Verbena Danish': 10,
+    'Red Croissant': 13,
+    'Cruffin': 23,
+    'Dark Chocolate Cookie': 37,
+    'Pistachio Cookie': 44,
+    'Pecan Cookie': 37
   }
 };
 

@@ -19,12 +19,23 @@
     const updated={...records}, recalculated=new Set(); let changed=false;
     // The confirmed 30 September count is already after preparation.
     for(let date='2026-10-01';date<=today;date=nextDay(date)) {
-      if(date===today && Number(get('hour'))<10) break;
       const existing=updated[date];
       const received=deliveries.filter(delivery=>delivery.date===date);
       const pending=received.filter(delivery=>!existing?.deliveryIds?.includes(delivery.id));
+      if(date===today && Number(get('hour'))<10){
+        if(Number(get('hour'))>=8&&pending.length){
+          const previous=Object.keys(updated).filter(d=>d<date).sort().at(-1);
+          const source=existing||updated[previous];
+          if(source){
+            const counts=source.counts.map((count,i)=>count===null?null:count+pending.reduce((sum,d)=>sum+(d.quantities[names[i]]||0),0));
+            updated[date]={...existing,counts,savedAt:now.toISOString(),inheritedFrom:existing?.inheritedFrom||previous,automaticDeduction:existing?existing.automaticDeduction:true,awaitingPreparation:existing?existing.awaitingPreparation:true,afterProoferDeduction:existing?existing.afterProoferDeduction:false,deliveryIds:[...(existing?.deliveryIds||[]),...pending.map(d=>d.id)]};
+            changed=true;
+          }
+        }
+        break;
+      }
       const inheritedChanged=existing?.automaticDeduction && recalculated.has(existing.inheritedFrom);
-      if(existing && !pending.length && !inheritedChanged) continue;
+      if(existing && !pending.length && !inheritedChanged && !existing.awaitingPreparation) continue;
       // Manual counts are authoritative. Add a missing delivery on its date only.
       if(existing && !existing.automaticDeduction) {
         const counts=existing.counts.map((count,i)=>count===null ? null : count+pending.reduce((sum,d)=>sum+(d.quantities[names[i]]||0),0));

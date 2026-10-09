@@ -5,7 +5,7 @@ window.ADVANCE_ORDERS = [
     "orderNumber": "33841041",
     "sourceFile": "03-10-2026.pdf",
     "date": "2026-10-03",
-    "time": "10:00",
+    "time": "08:00",
     "supplier": "Qima Cafe Commissary",
     "status": "pending",
     "quantities": {
@@ -109,7 +109,7 @@ window.ADVANCE_ORDERS = [
     "orderNumber": "33920818",
     "sourceFile": "06-10-2026.pdf",
     "date": "2026-10-06",
-    "time": "10:00",
+    "time": "08:00",
     "supplier": "Qima Cafe Commissary",
     "status": "pending",
     "quantities": {
@@ -223,7 +223,7 @@ window.ADVANCE_ORDERS = [
     "orderNumber": "33921018",
     "sourceFile": "08-10-2026.pdf",
     "date": "2026-10-08",
-    "time": "10:00",
+    "time": "08:00",
     "supplier": "Qima Cafe Commissary",
     "status": "pending",
     "quantities": {
@@ -368,7 +368,7 @@ window.ADVANCE_ORDERS = [
     "orderNumber": "33921178",
     "sourceFile": "10-10-2026.pdf",
     "date": "2026-10-10",
-    "time": "10:00",
+    "time": "08:00",
     "supplier": "Qima Cafe Commissary",
     "status": "pending",
     "quantities": {

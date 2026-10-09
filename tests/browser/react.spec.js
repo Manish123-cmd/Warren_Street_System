@@ -89,3 +89,19 @@ test('receiving an order updates totals and alerts, persists, and can be undone'
   await undo.click();
   await expect(page.locator('#orders-pending')).toHaveText(before.toLocaleString('en-GB'));
 });
+
+test('Saturday receipt adds to confirmed stock before preparation without duplication', async ({ page }) => {
+  await page.clock.setFixedTime(new Date('2026-10-10T07:00:00Z'));
+  await page.goto('/orders.html');
+  await expect(page.locator('main .order-alert')).toHaveCount(1);
+  await page.getByRole('button', { name: 'Mark as received for order 33921178 on 2026-10-10', exact: true }).click();
+  await page.goto('/frozen-pastries.html');
+  await expect(page.locator('main .order-alert')).toHaveCount(1);
+  await expect(page.getByRole('spinbutton', { name: 'Butter Croissant stock count', exact: true })).toHaveValue('57');
+  await expect(page.getByRole('spinbutton', { name: 'Pistachio Cookie stock count', exact: true })).toHaveValue('44');
+  await page.reload();
+  await expect(page.getByRole('spinbutton', { name: 'Butter Croissant stock count', exact: true })).toHaveValue('57');
+  await page.clock.setFixedTime(new Date('2026-10-10T09:00:00Z'));
+  await page.reload();
+  await expect(page.getByRole('spinbutton', { name: 'Butter Croissant stock count', exact: true })).toHaveValue('45');
+});

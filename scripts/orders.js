@@ -43,7 +43,8 @@
     const button=document.createElement('button');button.type='button';button.className='button secondary incoming-pdf';
     button.textContent=order.status==='received'?'Undo received':'Mark as received';
     button.setAttribute('aria-label',button.textContent+' for order '+order.orderNumber+' on '+order.date);
-    button.disabled=order.status!=='received'&&order.date>today();
+    const londonHour=Number(new Intl.DateTimeFormat('en-GB',{timeZone:'Europe/London',hour:'2-digit',hourCycle:'h23'}).format(new Date()));
+    button.disabled=order.status!=='received'&&(order.date>today()||(order.date===today()&&londonHour<8));
     button.addEventListener('click',()=>{
      try{OrderReceipts.setReceived(order.id,order.status!=='received');$('receipt-status').textContent=order.status==='received'?'Order marked as pending.':'Order marked as received.';}
      catch{$('receipt-status').textContent='Could not save receipt status. Please check browser storage and try again.';}
