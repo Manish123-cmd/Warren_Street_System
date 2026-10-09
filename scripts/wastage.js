@@ -5,10 +5,24 @@
  let reports={},baseline='',current=today(),dirty=false,blocked=false;
  try {baseline=localStorage.getItem(key)||'';reports=baseline?JSON.parse(baseline):{};
   if(!reports||Array.isArray(reports)||typeof reports!=='object'||Object.values(reports).some(r=>!r||!Array.isArray(r.counts)||r.counts.length!==15||r.counts.some(n=>n!==null&&(!Number.isInteger(n)||n<0||n>999999))||typeof r.reporter!=='string'||typeof r.notes!=='string'))throw Error();
-  // User-confirmed zero wastage for 1 October. Apply once; retain later edits.
-  const confirmedDate='2026-10-01', revision='2026-10-01-zero-wastage-1';
-  if(reports[confirmedDate]?.confirmedRevision!==revision){
-   reports={...reports,[confirmedDate]:{...reports[confirmedDate],counts:inputs.map(()=>0),reporter:reports[confirmedDate]?.reporter||'',notes:reports[confirmedDate]?.notes||'Confirmed no wastage.',savedAt:new Date().toISOString(),confirmedRevision:revision}};
+  // User-confirmed daily reports. Apply each revision once; retain later edits.
+  // Counts follow the pastry order in wastage.html; unlisted items are zero.
+  const confirmedReports=[
+   {date:'2026-10-01',revision:'2026-10-01-zero-wastage-1',counts:Array(15).fill(0),notes:'Confirmed no wastage.'},
+   {date:'2026-10-02',revision:'2026-10-02-wastage-1',counts:[0,0,3,0,4,0,0,0,1,0,0,0,0,0,0]},
+   {date:'2026-10-03',revision:'2026-10-03-zero-wastage-1',counts:Array(15).fill(0),notes:'Confirmed no wastage.'},
+   {date:'2026-10-04',revision:'2026-10-04-wastage-1',counts:[0,0,7,0,0,3,0,3,5,0,0,0,0,1,0]},
+   {date:'2026-10-05',revision:'2026-10-05-zero-wastage-1',counts:Array(15).fill(0),notes:'Confirmed no wastage.'},
+   {date:'2026-10-06',revision:'2026-10-06-wastage-1',counts:[0,0,0,0,0,1,2,0,0,0,1,1,0,0,0],notes:'Cruffin wastage: 1 blackberry cruffin.'},
+   {date:'2026-10-08',revision:'2026-10-08-wastage-1',counts:[0,0,0,2,4,2,0,0,2,0,0,0,0,0,0],notes:'Croissant twists recorded under Labneh Twist.'}
+  ];
+  let updated=false;
+  for(const {date,revision,counts,notes} of confirmedReports){
+   if(reports[date]?.confirmedRevision===revision)continue;
+   reports={...reports,[date]:{...reports[date],counts,reporter:reports[date]?.reporter||'',notes:reports[date]?.notes||notes||'',savedAt:new Date().toISOString(),confirmedRevision:revision}};
+   updated=true;
+  }
+  if(updated){
    const serialized=JSON.stringify(reports);localStorage.setItem(key,serialized);baseline=serialized;
   }
  }catch{blocked=true;$('save-wastage').disabled=true;}
