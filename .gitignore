@@ -1,5 +1,8 @@
 node_modules/
 dist/
+frontend/public/
+test-results/
+playwright-report/
 .env
 .env.*
 !.env.example

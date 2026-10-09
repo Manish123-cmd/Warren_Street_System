@@ -2,37 +2,17 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<link rel="icon" type="image/jpeg" href="Assets/Qima_Logo.jpeg">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#ffffff">
 <meta name="description" content="Warren Street System. Your cafe inventory workspace.">
 <title>Upcoming Orders &amp; Sales | Warren_Street_System</title>
+<link rel="icon" type="image/jpeg" href="Assets/Qima_Logo.jpeg">
 <link rel="stylesheet" href="styles/styles.css">
 <link rel="stylesheet" href="styles/polish.css">
 <link rel="stylesheet" href="styles/wastage.css">
-<script src="scripts/initial-stock.js" defer></script><script src="scripts/weekly-orders.js" defer></script><script src="scripts/sales-summary.js" defer></script><script src="scripts/wastage-week.js" defer></script><script src="scripts/orders.js" defer></script>
-<script src="scripts/order-alerts.js" defer></script>
-<script src="scripts/shared-config.js" defer></script><script src="scripts/shared-orders.js" defer></script><script src="scripts/order-documents.js" defer></script>
+  <script type="module" crossorigin src="./react-assets/main-UVhSsjZL.js"></script>
 </head>
-<body class="orders-screen">
-<aside class="sidebar">
-<a class="brand" href="index.html"><img class="brand-logo" src="Assets/Qima_Logo.jpeg" alt="Qima logo" width="48" height="48"><span>QIMA<span class="brand-sub">WARREN STREET SYSTEM</span></span></a>
-<p class="nav-label">WORKSPACE</p>
-<nav aria-label="Main navigation">
-<a class="nav-item" href="index.html"><span aria-hidden="true">&#9638;</span> Overview</a>
-<a class="nav-item "  href="frozen-pastries.html"><span aria-hidden="true">&#10052;</span> Frozen Pastries Stock</a>
-<a class="nav-item" href="creams.html"><span aria-hidden="true">&#9684;</span> Creams</a>
-<a class="nav-item" href="setting-proover.html"><span aria-hidden="true">&#9636;</span> Setting Proover</a>
-<a class="nav-item" href="wastage.html"><span aria-hidden="true">&#8634;</span> Wastage</a>
-<a class="nav-item active" aria-current="page" href="orders.html"><span aria-hidden="true">&#9636;</span> Orders &amp; Sales</a>
-</nav>
-<div class="sidebar-note"><span>THE DAILY RITUAL</span><p>A little care.<br>A better day.</p><small>Prepared with purpose, every morning.</small></div><div class="location-card"><span class="location-icon" aria-hidden="true">Q</span><div><strong>Warren Street</strong><span>Qima Cafe</span></div></div>
-</aside>
-<div class="app-shell">
-<header class="topbar"><span>Workspace <span class="slash">/</span> <strong>Orders &amp; Sales</strong></span><span class="location-pill"><span class="green-dot"></span> Warren Street</span></header>
-<main><div class="page-heading"><div><p class="eyebrow">DELIVERIES &amp; PERFORMANCE</p><h1>Upcoming Orders &amp; Sales</h1><p class="subtitle">See what is arriving and compare weekly orders with estimated sales.</p></div></div><section class="inventory-panel"><div class="table-toolbar"><h2>Monday?Sunday</h2><button id="orders-prev-week" type="button" class="button secondary">Previous week</button><button id="orders-this-week" type="button" class="button secondary">This week</button><button id="orders-next-week" type="button" class="button secondary">Next week</button></div><p id="orders-week-range" class="stock-note" role="status"></p><section class="receiving-panel" aria-labelledby="receiving-title"><h3 id="receiving-title">Orders to be received</h3><div class="receiving-metrics"><div><span>Ordered this week</span><strong id="orders-total">—</strong></div><div><span>Received this week</span><strong id="orders-received">—</strong></div><div><span>Still to receive</span><strong id="orders-pending">—</strong></div></div><p class="stock-note">Your deliveries for the selected week. Open a PDF for the full order.</p><div id="receiving-list"></div><section class="order-documents" aria-labelledby="order-documents-title"><h3 id="order-documents-title">Order PDFs</h3><p>Open a delivery document to see everything coming on that date.</p><div id="order-document-list"></div><form id="order-login" hidden><label>Staff email<input id="order-email" type="email" autocomplete="username" required></label><label>Password<input id="order-password" type="password" autocomplete="current-password" required></label><button class="button secondary" type="submit">Sign in to upload</button></form><button id="order-logout" type="button" class="button secondary" hidden>Sign out</button><form id="order-pdf-form"><label>Expected delivery date<input id="order-pdf-date" type="date" required></label><label>Order PDF<input id="order-pdf-file" type="file" accept=".pdf,application/pdf" required></label><button class="button secondary" id="save-order-pdf" type="submit">Save PDF on this device</button><p id="order-sharing-note">New uploads stay in this browser until shared storage is connected. Uploading a PDF does not update stock or chart quantities.</p><p id="order-pdf-status" role="status"></p></form></section></section>
-<figure class="sales-chart" aria-labelledby="sales-chart-title"><figcaption><h3 id="sales-chart-title">Weekly orders &amp; estimated sales</h3><p>Monday–Sunday · Purple: ordered · Lilac: estimated sold</p><p id="sales-coverage"></p></figcaption><div class="sales-chart-scroll"><div id="sales-chart-bars" class="sales-chart-bars"></div></div><p>Estimated sold = prepared pastries minus recorded wastage. Zero wastage means all prepared pastries sold. Pending deliveries and frozen stock are excluded from sales. Missing preparation or wastage stays unknown; partial totals show their recorded-day coverage.</p></figure></section></main>
-<footer><span>Warren Street System</span><span>Made for the everyday.</span></footer>
-</div>
+<body>
+<div id="root"></div>
 </body>
 </html>

@@ -2,108 +2,17 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<link rel="icon" type="image/jpeg" href="Assets/Qima_Logo.jpeg">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#ffffff">
 <meta name="description" content="Warren Street System. Your cafe inventory workspace.">
 <title>Creams | Warren_Street_System</title>
+<link rel="icon" type="image/jpeg" href="Assets/Qima_Logo.jpeg">
 <link rel="stylesheet" href="styles/styles.css">
 <link rel="stylesheet" href="styles/polish.css">
 <link rel="stylesheet" href="styles/creams.css">
-<script src="scripts/initial-stock.js" defer></script>
-<script src="scripts/weekly-orders.js" defer></script>
-<script src="scripts/order-alerts.js" defer></script>
+  <script type="module" crossorigin src="./react-assets/main-UVhSsjZL.js"></script>
 </head>
-<body class="creams-screen">
-<aside class="sidebar">
-<a class="brand" href="index.html"><img class="brand-logo" src="Assets/Qima_Logo.jpeg" alt="Qima logo" width="48" height="48"><span>QIMA<span class="brand-sub">WARREN STREET SYSTEM</span></span></a>
-<p class="nav-label">WORKSPACE</p>
-<nav aria-label="Main navigation">
-<a class="nav-item" href="index.html"><span aria-hidden="true">&#9638;</span> Overview</a>
-<a class="nav-item "  href="frozen-pastries.html"><span aria-hidden="true">&#10052;</span> Frozen Pastries Stock</a>
-<a class="nav-item active" aria-current="page" href="creams.html"><span aria-hidden="true">&#9684;</span> Creams</a>
-<a class="nav-item" href="setting-proover.html"><span aria-hidden="true">&#9636;</span> Setting Proover</a>
-<a class="nav-item" href="wastage.html"><span aria-hidden="true">&#8634;</span> Wastage</a>
-<a class="nav-item" href="orders.html"><span aria-hidden="true">&#9636;</span> Orders &amp; Sales</a>
-</nav>
-<div class="sidebar-note"><span>THE DAILY RITUAL</span><p>A little care.<br>A better day.</p><small>Prepared with purpose, every morning.</small></div><div class="location-card"><span class="location-icon" aria-hidden="true">Q</span><div><strong>Warren Street</strong><span>Qima Cafe</span></div></div>
-</aside>
-<div class="app-shell">
-<header class="topbar"><span>Workspace <span class="slash">/</span> <strong>Creams</strong></span><span class="location-pill"><span class="green-dot"></span> Warren Street</span></header>
-<main>
-<div class="page-heading"><div><p class="eyebrow">THE RECIPE COLLECTION</p><h1>Creams</h1><p class="subtitle">Your cream recipes and preparation steps, together.</p></div><span class="badge">10 recipes</span></div>
-<article class="cream-recipe" aria-labelledby="ganache-title">
-<header class="cream-recipe-heading"><p class="eyebrow">RECIPE 01</p><h2 id="ganache-title">Whipped White Chocolate Ganache</h2><p>Whipping cream, gelatine mass and white chocolate.</p></header>
-<div class="cream-recipe-grid">
-<section class="cream-ingredients" aria-labelledby="ingredients-title"><h3 id="ingredients-title">Ingredients</h3><table><thead><tr><th scope="col">Ingredient</th><th scope="col">Quantity</th></tr></thead><tbody><tr><th scope="row">Whipping Cream</th><td>1,174 g</td></tr><tr><th scope="row">Gelatine Mass</th><td>80 g</td></tr><tr><th scope="row">White Chocolate</th><td>250 g</td></tr></tbody></table><p class="cream-total">Total ingredient weight <strong>1,504 g</strong></p></section>
-<section class="cream-method" aria-labelledby="method-title"><h3 id="method-title">Preparation</h3><ol><li>Heat the whipping cream in a pot.</li><li>Place the white chocolate in a separate bowl.</li><li>Weigh the gelatine mass and set it aside.</li><li>Once the cream starts to steam, add the gelatine mass and dissolve it over very low heat.</li><li>Add the melted white chocolate and blend.</li></ol></section>
-</div>
-</article>
-<article class="cream-recipe" aria-labelledby="basil-ganache-title">
-<header class="cream-recipe-heading"><p class="eyebrow">RECIPE 02</p><h2 id="basil-ganache-title">White Whipped Basil Ganache</h2><p>Whipping cream, loose basil, gelatine mass and white chocolate.</p></header>
-<div class="cream-recipe-grid">
-<section class="cream-ingredients" aria-labelledby="basil-ingredients-title"><h3 id="basil-ingredients-title">Ingredients</h3><table><thead><tr><th scope="col">Ingredient</th><th scope="col">Quantity</th></tr></thead><tbody><tr><th scope="row">Whipping Cream</th><td>1,174 g</td></tr><tr><th scope="row">Basil Loose</th><td>15 g</td></tr><tr><th scope="row">Gelatine Mass</th><td>80 g</td></tr><tr><th scope="row">White Chocolate</th><td>250 g</td></tr></tbody></table><p class="cream-total">Total ingredient weight <strong>1,519 g</strong></p></section>
-<section class="cream-method" aria-labelledby="basil-method-title"><h3 id="basil-method-title">Preparation</h3><ol><li>Heat the whipping cream and loose basil together in a pot.</li><li>Place the white chocolate in a separate bowl.</li><li>Weigh the gelatine mass and set it aside.</li><li>Once the cream starts to steam, add the gelatine mass and dissolve it over very low heat.</li><li>Add the melted white chocolate and blend.</li><li>Pass the ganache through a sieve as you transfer it into a container.</li></ol></section>
-</div>
-</article>
-<article class="cream-recipe" aria-labelledby="salted-caramel-title">
-<header class="cream-recipe-heading"><p class="eyebrow">RECIPE 03</p><h2 id="salted-caramel-title">Salted Caramel</h2><p>Caster sugar, cream, butter and Maldon salt.</p></header>
-<div class="cream-recipe-grid">
-<section class="cream-ingredients" aria-labelledby="caramel-ingredients-title"><h3 id="caramel-ingredients-title">Ingredients</h3><table><thead><tr><th scope="col">Ingredient</th><th scope="col">Quantity</th></tr></thead><tbody><tr><th scope="row">Caster Sugar</th><td>1,980 g</td></tr><tr><th scope="row">Cream</th><td>1,920 g</td></tr><tr><th scope="row">Butter</th><td>1,200 g</td></tr><tr><th scope="row">Maldon Salt</th><td>24 g</td></tr></tbody></table><p class="cream-total">Total ingredient weight <strong>5,124 g</strong></p></section>
-<section class="cream-method" aria-labelledby="caramel-method-title"><h3 id="caramel-method-title">Preparation</h3><ol><li>Make a dry caramel with the caster sugar.</li><li>Pour in the <strong>hot cream</strong> and cook over medium-low heat for about 10 minutes, until all the caramel has dissolved.</li><li>Add the butter and Maldon salt, then blend with a hand blender.</li></ol></section>
-</div>
-</article>
-<article class="cream-recipe" aria-labelledby="coconut-ganache-title">
-<header class="cream-recipe-heading"><p class="eyebrow">RECIPE 04</p><h2 id="coconut-ganache-title">Coconut Ganache</h2><p>Coconut puree, gel mass, white chocolate and cream.</p></header>
-<div class="cream-recipe-grid">
-<section class="cream-ingredients" aria-labelledby="coconut-ingredients-title"><h3 id="coconut-ingredients-title">Ingredients</h3><table><thead><tr><th scope="col">Ingredient</th><th scope="col">Batch 1</th><th scope="col">Batch 2</th></tr></thead><tbody><tr><th scope="row">Coconut Puree</th><td>1,000 g</td><td>2,000 g</td></tr><tr><th scope="row">Gel Mass</th><td>180 g</td><td>360 g</td></tr><tr><th scope="row">White Chocolate</th><td>865 g</td><td>1,729 g</td></tr><tr><th scope="row">Cream</th><td>850 g</td><td>1,700 g</td></tr></tbody></table><p class="cream-total">Batch 1 ingredient weight <strong>2,895 g</strong></p><p class="cream-total">Batch 2 ingredient weight <strong>5,789 g</strong></p></section>
-<section class="cream-method" aria-labelledby="coconut-method-title"><h3 id="coconut-method-title">Preparation</h3><ol><li>Bring the coconut puree to the boil.</li><li>Pour over the white chocolate and gel mass, then blend with a hand blender.</li><li>Slowly pour in the <strong>cold cream</strong> while blending.</li></ol></section>
-</div>
-</article>
-<article class="cream-recipe" aria-labelledby="strawberry-gel-title">
-<header class="cream-recipe-heading"><p class="eyebrow">RECIPE 05</p><h2 id="strawberry-gel-title">Strawberry Gel</h2><p>Strawberry puree, pectin Napage, sugar and lemon juice.</p></header>
-<div class="cream-recipe-grid">
-<section class="cream-ingredients" aria-labelledby="strawberry-ingredients-title"><h3 id="strawberry-ingredients-title">Ingredients</h3><table><thead><tr><th scope="col">Ingredient</th><th scope="col">Quantity</th></tr></thead><tbody><tr><th scope="row">Strawberry Puree</th><td>1,000 g</td></tr><tr><th scope="row">Pectin Napage</th><td>20 g</td></tr><tr><th scope="row">Sugar</th><td>200 g</td></tr><tr><th scope="row">Lemon Juice</th><td>20 g</td></tr></tbody></table><p class="cream-total">Total ingredient weight <strong>1,240 g</strong></p></section>
-<section class="cream-method" aria-labelledby="strawberry-method-title"><h3 id="strawberry-method-title">Preparation</h3><ol><li>Heat the strawberry puree in a pot until all the frozen puree has melted and steam starts to appear.</li><li>Mix the pectin into the sugar, then add to the hot puree. Cook for about 5–10 minutes, stirring often, until it gels. Test by placing a drop on a spoon: the drop should keep its dome shape.</li><li>Stir in the lemon juice.</li></ol></section>
-</div>
-</article>
-<article class="cream-recipe" aria-labelledby="chai-cream-title">
-<header class="cream-recipe-heading"><p class="eyebrow">RECIPE 06</p><h2 id="chai-cream-title">Chai Cream</h2><p>Yemeni tea and cardamom-infused pastry cream with cinnamon and butter.</p></header>
-<div class="cream-recipe-grid">
-<section class="cream-ingredients" aria-labelledby="chai-ingredients-title"><h3 id="chai-ingredients-title">Ingredients</h3><table><thead><tr><th scope="col">Ingredient</th><th scope="col">Quantity</th></tr></thead><tbody><tr><th scope="row">Milk</th><td>1,600 g</td></tr><tr><th scope="row">Sugar</th><td>320 g</td></tr><tr><th scope="row">Yemeni Tea</th><td>40 g</td></tr><tr><th scope="row">Ground Cinnamon</th><td>20 g</td></tr><tr><th scope="row">Cardamom Pods</th><td>16 pcs</td></tr><tr><th scope="row">Ground Cardamom</th><td>10 g</td></tr><tr><th scope="row">Condensed Milk</th><td>150 g</td></tr><tr><th scope="row">Egg Yolk</th><td>288 g</td></tr><tr><th scope="row">Cornflour</th><td>144 g</td></tr><tr><th scope="row">Gelatine Mass</th><td>160 g</td></tr><tr><th scope="row">Butter</th><td>1,600 g</td></tr></tbody></table></section>
-<section class="cream-method" aria-labelledby="chai-method-title"><h3 id="chai-method-title">Preparation</h3><ol><li>Mix the milk, sugar, Yemeni tea, ground cinnamon, cardamom pods and ground cardamom in a pot. Bring to the boil, then cover and let infuse for 10–15 minutes.</li><li>Strain the milk mixture through a damp cheesecloth.</li><li>Add more milk to bring the total weight back to <strong>1,600 g</strong>. Add the condensed milk and stir to dissolve, to avoid burning.</li><li>Make a pastry cream.</li><li>Add the gelatine mass and stir to dissolve.</li><li>Add the butter and blend with a hand blender until smooth.</li></ol></section>
-</div>
-</article>
-<article class="cream-recipe" aria-labelledby="pastry-cream-base-title">
-<header class="cream-recipe-heading"><p class="eyebrow">RECIPE 07</p><h2 id="pastry-cream-base-title">Pastry Cream Base</h2><p>Milk, sugar, egg yolk, cornflour, gelatine mass and butter.</p></header>
-<div class="cream-recipe-grid">
-<section class="cream-ingredients" aria-labelledby="pastry-base-ingredients-title"><h3 id="pastry-base-ingredients-title">Ingredients</h3><table><thead><tr><th scope="col">Ingredient</th><th scope="col">Quantity</th></tr></thead><tbody><tr><th scope="row">Milk</th><td>1,600 g</td></tr><tr><th scope="row">Sugar</th><td>320 g</td></tr><tr><th scope="row">Egg Yolk</th><td>288 g</td></tr><tr><th scope="row">Cornflour</th><td>144 g</td></tr><tr><th scope="row">Gelatine Mass</th><td>160 g</td></tr><tr><th scope="row">Butter</th><td>1,600 g</td></tr></tbody></table><p class="cream-total">Total ingredient weight <strong>4,112 g</strong></p></section>
-<section class="cream-method" aria-labelledby="pastry-base-method-title"><h3 id="pastry-base-method-title">Preparation</h3><ol><li>Heat the milk in a pot with <strong>120 g of the sugar</strong>.</li><li>Mix the egg yolk, cornflour and the <strong>remaining 200 g of sugar</strong> in a bowl.</li><li>Weigh the gelatine mass and butter separately.</li><li>When the milk boils, pour a little into the yolk mixture and mix thoroughly. Return the mixture to the hot milk and bring to the boil.</li><li>Add the gelatine mass and stir slowly until it dissolves.</li><li>Add the butter and blend.</li></ol></section>
-</div>
-</article>
-<article class="cream-recipe" aria-labelledby="caramel-cream-title">
-<header class="cream-recipe-heading"><p class="eyebrow">RECIPE 08</p><h2 id="caramel-cream-title">Caramel Cream</h2><p>Pastry cream base mixed with salted caramel cream.</p></header>
-<div class="cream-recipe-grid">
-<section class="cream-ingredients" aria-labelledby="caramel-cream-ingredients-title"><h3 id="caramel-cream-ingredients-title">Ingredients</h3><table><thead><tr><th scope="col">Ingredient</th><th scope="col">Quantity</th></tr></thead><tbody><tr><th scope="row">Pastry Cream Base</th><td>1,800 g</td></tr><tr><th scope="row">Salted Caramel Cream</th><td>400 g</td></tr></tbody></table><p class="cream-total">Total ingredient weight <strong>2,200 g</strong></p></section>
-<section class="cream-method" aria-labelledby="caramel-cream-method-title"><h3 id="caramel-cream-method-title">Preparation</h3><ol><li>Mix the pastry cream base and salted caramel cream together.</li></ol></section>
-</div>
-</article>
-<article class="cream-recipe" aria-labelledby="jasmine-cream-title">
-<header class="cream-recipe-heading"><p class="eyebrow">RECIPE 09</p><h2 id="jasmine-cream-title">Jasmine Cream</h2><p>Pastry cream base and jasmine syrup.</p></header>
-<div class="cream-recipe-grid">
-<section class="cream-ingredients" aria-labelledby="jasmine-ingredients-title"><h3 id="jasmine-ingredients-title">Ingredients</h3><table><thead><tr><th scope="col">Ingredient</th><th scope="col">Quantity</th></tr></thead><tbody><tr><th scope="row">Pastry Cream Base</th><td>1,800 g</td></tr><tr><th scope="row">Jasmine Syrup</th><td>153 g</td></tr></tbody></table><p class="cream-total">Total ingredient weight <strong>1,953 g</strong></p></section>
-<section class="cream-method" aria-labelledby="jasmine-method-title"><h3 id="jasmine-method-title">Preparation</h3><p>Preparation steps to be added.</p></section>
-</div>
-</article>
-<article class="cream-recipe" aria-labelledby="cheesecake-cream-title">
-<header class="cream-recipe-heading"><p class="eyebrow">RECIPE 10</p><h2 id="cheesecake-cream-title">Cheesecake Cream</h2><p>Cream cheese, pastry cream, vanilla, citrus zest and icing sugar.</p></header>
-<div class="cream-recipe-grid">
-<section class="cream-ingredients" aria-labelledby="cheesecake-ingredients-title"><h3 id="cheesecake-ingredients-title">Ingredients</h3><table><thead><tr><th scope="col">Ingredient</th><th scope="col">Quantity</th></tr></thead><tbody><tr><th scope="row">Cream Cheese</th><td>1,500 g</td></tr><tr><th scope="row">Pastry Cream</th><td>400 g</td></tr><tr><th scope="row">Vanilla</th><td>15 g</td></tr><tr><th scope="row">Lime / Lemon Zest</th><td>15 g</td></tr><tr><th scope="row">Icing Sugar</th><td>150 g</td></tr></tbody></table><p class="cream-total">Total ingredient weight <strong>2,080 g</strong></p></section>
-<section class="cream-method" aria-labelledby="cheesecake-method-title"><h3 id="cheesecake-method-title">Preparation</h3><ol><li>Beat the cream cheese until smooth and fluffy.</li><li>Add the icing sugar, lemon zest and vanilla.</li><li>Then add the whipped pastry cream.</li></ol></section>
-</div>
-</article>
-</main>
-<footer><span>Warren Street System</span><span>Made for the everyday.</span></footer>
-</div>
+<body>
+<div id="root"></div>
 </body>
 </html>

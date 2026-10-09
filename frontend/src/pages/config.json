@@ -1,0 +1,83 @@
+[
+  {
+    "file": "index.html",
+    "component": "Overview",
+    "bodyClass": "overview-screen",
+    "title": "Overview | Warren_Street_System",
+    "scripts": [
+      "scripts/app.js",
+      "scripts/initial-stock.js",
+      "scripts/weekly-orders.js",
+      "scripts/order-alerts.js"
+    ]
+  },
+  {
+    "file": "frozen-pastries.html",
+    "component": "FrozenPastries",
+    "bodyClass": "stock-screen",
+    "title": "Frozen Pastries Stock | Warren_Street_System",
+    "scripts": [
+      "scripts/app.js",
+      "scripts/order-parser.js",
+      "scripts/initial-stock.js",
+      "scripts/proofer.js",
+      "scripts/stock.js",
+      "scripts/delivery.js",
+      "scripts/weekly-orders.js",
+      "scripts/order-alerts.js"
+    ]
+  },
+  {
+    "file": "creams.html",
+    "component": "Creams",
+    "bodyClass": "creams-screen",
+    "title": "Creams | Warren_Street_System",
+    "scripts": [
+      "scripts/initial-stock.js",
+      "scripts/weekly-orders.js",
+      "scripts/order-alerts.js"
+    ]
+  },
+  {
+    "file": "setting-proover.html",
+    "component": "ProoferGuide",
+    "bodyClass": "guide-screen",
+    "title": "Setting Proover | Warren_Street_System",
+    "scripts": [
+      "scripts/tray-guide.js",
+      "scripts/initial-stock.js",
+      "scripts/weekly-orders.js",
+      "scripts/order-alerts.js"
+    ]
+  },
+  {
+    "file": "wastage.html",
+    "component": "Wastage",
+    "bodyClass": "wastage-screen",
+    "title": "Wastage | Warren_Street_System",
+    "scripts": [
+      "scripts/initial-stock.js",
+      "scripts/weekly-orders.js",
+      "scripts/wastage-week.js",
+      "scripts/wastage.js",
+      "scripts/order-alerts.js"
+    ]
+  },
+  {
+    "file": "orders.html",
+    "component": "Orders",
+    "bodyClass": "orders-screen",
+    "title": "Upcoming Orders & Sales | Warren_Street_System",
+    "scripts": [
+      "scripts/initial-stock.js",
+      "scripts/weekly-orders.js",
+      "scripts/sales-summary.js",
+      "scripts/wastage-week.js",
+      "scripts/orders.js",
+      "scripts/order-alerts.js",
+      "scripts/shared-config.js",
+      "scripts/shared-orders.js",
+      "scripts/order-documents.js"
+    ]
+  }
+]

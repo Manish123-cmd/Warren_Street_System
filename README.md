@@ -10,7 +10,13 @@ A white, responsive inventory workspace for Qima Cafe Warren Street, with blue a
 
 ## Preview and hosting
 
-Open `index.html` in a browser. No build step or dependencies are required. Published through GitHub Pages from the `main` branch and root folder.
+The interface now uses React and Vite. Install Node.js 24, then run `npm ci` and `npm run dev` to edit and preview the app. Run `npm test`, `npm run build`, and optionally `npm run test:browser` before publishing.
+
+Edit React source in `frontend/src/`, with page entry templates in `frontend/*.html`. Root HTML and `react-assets/` are compiled deployment files; do not edit them manually. The build writes `dist/` and updates the root deployment files. GitHub Pages continues serving the `main` branch root at the existing address, so browser storage stays on the same origin. Commit the compiled root files and `react-assets/` alongside source changes after building. GitHub Actions runs the tests and production build on every main push and retains the compiled site as an artifact.
+
+React renders shared navigation, header, footer and six page components. Existing DOM controllers in `scripts/` initialize sequentially after React mounts, retaining stock calculations, OCR, reporting and storage behavior. Page links intentionally perform full document navigation to preserve controller lifetimes and unsaved-change prompts. These controllers are a compatibility layer; moving their state into React hooks and adding a Flask API/database are separate future work.
+
+Browser checks use Playwright with Microsoft Edge (`npm run test:browser`). Stock, wastage and order data still use their existing localStorage keys; this migration does not introduce a database or change data ownership.
 
 Repository: https://github.com/Manish123-cmd/Warren_Street_System
 
@@ -62,7 +68,7 @@ The confirmed 1 October 2026 delivery in `scripts/initial-stock.js` adds 50 butt
 - `Assets/` ? logos and reference photos.
 - `tests/` ? stock-rule and order-parser checks.
 
-HTML pages stay at the root so existing GitHub Pages links continue to work. No build step is required.
+Compiled HTML pages stay at the root so existing GitHub Pages links continue to work. Run `npm run build` after React source changes.
 
 ## Wastage
 
