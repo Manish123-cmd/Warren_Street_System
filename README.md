@@ -1,5 +1,11 @@
 # Warren_Street_System
 
+Weekly Excel backup tooling and setup: [backups/README.md](backups/README.md).
+It produces four London-timestamped workbooks in year/month Google Drive folders,
+with safe retries and retention disabled by default. Activation requires a real
+MongoDB data source and private Drive configuration; current browser records are
+not automatically migrated or backed up by the runner.
+
 A white, responsive inventory workspace for Qima Cafe Warren Street, with blue accents and the original cafe photograph.
 
 ## Pages

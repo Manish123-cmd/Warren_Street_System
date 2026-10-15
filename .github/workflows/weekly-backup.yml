@@ -1,0 +1,60 @@
+name: Weekly Excel backup
+
+on:
+  schedule:
+    - cron: '0 20 * * 1'
+  workflow_dispatch:
+    inputs:
+      week:
+        description: 'Optional completed reporting week Monday (YYYY-MM-DD); blank = previous week'
+        required: false
+        type: string
+
+permissions:
+  contents: read
+  id-token: write
+
+concurrency:
+  group: warren-weekly-backup
+  cancel-in-progress: false
+
+jobs:
+  backup:
+    # Explicit activation is required: the current website has no MongoDB backend.
+    if: vars.BACKUPS_ENABLED == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      MONGODB_URI: ${{ secrets.MONGODB_URI }}
+      MONGODB_DATABASE: ${{ vars.MONGODB_DATABASE }}
+      BACKUP_SOURCES_JSON: ${{ vars.BACKUP_SOURCES_JSON }}
+      GOOGLE_DRIVE_PARENT_FOLDER_ID: ${{ vars.GOOGLE_DRIVE_PARENT_FOLDER_ID }}
+      GOOGLE_DRIVE_CREDENTIALS_JSON: ${{ secrets.GOOGLE_DRIVE_CREDENTIALS_JSON }}
+      REPORTING_WEEK: ${{ inputs.week }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+          cache-dependency-path: backups/requirements.txt
+      - name: Authenticate with short-lived Google credentials when configured
+        if: vars.GCP_WORKLOAD_IDENTITY_PROVIDER != ''
+        uses: google-github-actions/auth@v3
+        with:
+          workload_identity_provider: ${{ vars.GCP_WORKLOAD_IDENTITY_PROVIDER }}
+          service_account: ${{ vars.GCP_BACKUP_SERVICE_ACCOUNT }}
+      - run: python -m pip install -r backups/requirements.txt
+      - name: Export and verify four workbooks
+        shell: bash
+        run: |
+          if [ -n "$REPORTING_WEEK" ]; then
+            python -m backups --week "$REPORTING_WEEK"
+          else
+            python -m backups
+          fi
+      - name: Failure notification in Actions
+        if: failure()
+        run: |
+          echo '::error::Weekly Excel backup failed. Review private configuration, then manually rerun the same reporting week. Successful files are preserved.'
+          echo 'Backup failed. Recovery: run this workflow manually with the original reporting Monday. No automatic retention or deletion was run.' >> "$GITHUB_STEP_SUMMARY"
