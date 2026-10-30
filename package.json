@@ -13,10 +13,8 @@
     "test:browser": "playwright test"
   },
   "dependencies": {
-    "@designcodeio/threeui": "^1.2.0",
     "react": "^19.3.0",
-    "react-dom": "^19.3.0",
-    "three": "^0.165.0"
+    "react-dom": "^19.3.0"
   },
   "devDependencies": {
     "@playwright/test": "^1.64.0",

@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- Stand mixer from the Warren Street System logo: cream on forest. -->
+  <rect width="64" height="64" rx="14" fill="#145232"/>
+  <g fill="#f9f3e4">
+    <rect x="15" y="10.5" width="5" height="3" rx="1.5" transform="rotate(-35 17.5 12)"/>
+    <path d="M13 23v-3.5C13 13.5 17 11 24 11h16c6.5 0 10 2.8 10 9v3z"/>
+    <rect x="13" y="24.5" width="37" height="3.5" rx="1.2"/>
+    <path d="M15 29h8.5v14.5c0 4 2.4 6 6.5 6H46v4H15z"/>
+    <rect x="12" y="51" width="36" height="4.5" rx="2"/>
+    <rect x="37.5" y="28" width="3" height="4"/>
+    <path d="M28.5 32H52v3.5c0 7.2-4.8 11.5-11.75 11.5S28.5 42.7 28.5 35.5z"/>
+    <rect x="33.5" y="46" width="13.5" height="3" rx="1.2"/>
+  </g>
+  <g fill="none" stroke="#145232" stroke-width="1.6">
+    <ellipse cx="39" cy="38.5" rx="5" ry="6"/>
+    <path d="M39 32.5v12"/>
+  </g>
+</svg>

@@ -1,9 +1,8 @@
 import { useEffect, useState } from 'react';
-import { LaserCollection } from '@designcodeio/threeui/components/LaserCollection';
-import '@designcodeio/threeui/style.css';
 
-const title = 'Warren Street System';
-const duration = 3800;
+const duration = 4000;
+// Each layer shows one part of the same logo image, so together they rebuild it exactly.
+const layers = ['mixer', 'leaves-left', 'leaves-right', 'banner', 'estd'];
 
 export default function Intro({ onDone }) {
   const [leaving, setLeaving] = useState(false);
@@ -18,14 +17,12 @@ export default function Intro({ onDone }) {
   return (
     <div className={leaving ? 'intro leaving' : 'intro'} role="presentation" onClick={() => setLeaving(true)}
       onAnimationEnd={event => { if (event.animationName === 'intro-out') onDone(); }}>
-      <div className="shader-frame">
-        <LaserCollection variant="vanishing-array" speed={1.00} size={1.00} length={1.00} density={1.00} opacity={1.00} hue={0} saturation={1.00} brightness={1.26} />
-      </div>
-      <h1 className="intro-title" aria-label={title}>
-        {[...title].map((letter, index) => (
-          <span key={index} aria-hidden="true" style={{ '--i': index }}>{letter === ' ' ? ' ' : letter}</span>
+      <div className="intro-logo" role="img" aria-label="Warren Street System, established 2026">
+        {layers.map(layer => (
+          <div key={layer} className={`intro-layer ${layer}`} aria-hidden="true"><img src="Assets/brand/logo.png" alt="" /></div>
         ))}
-      </h1>
+        <span className="intro-shine" aria-hidden="true" />
+      </div>
       <p className="intro-sub">Qima Cafe · Warren Street</p>
       <span className="intro-skip">Click or press any key to skip</span>
     </div>

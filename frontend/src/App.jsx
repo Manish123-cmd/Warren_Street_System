@@ -15,7 +15,7 @@ const page = pages.find(page => page.file === filename) || pages[0];
 const Screen = components[page.component];
 let initialization;
 
-// The laser intro plays once per browser session; three.js loads only when it does.
+// The logo intro plays once per browser session.
 const Intro = lazy(() => import('./components/Intro.jsx'));
 function shouldPlayIntro() {
   if (navigator.webdriver || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return false;
