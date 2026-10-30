@@ -29,12 +29,28 @@
  }catch{blocked=true;$('save-wastage').disabled=true;}
  function summary(){const values=[...inputs,almond].filter(i=>i.value!==''&&i.validity.valid).map(i=>Number(i.value));$('waste-total').textContent=values.length?values.reduce((a,b)=>a+b,0).toLocaleString():'—';$('waste-counted').textContent=`${inputs.filter(i=>i.value!==''&&i.validity.valid).length} / 15`;}
  function load(date){current=date;$('waste-date').value=date;const report=reports[date];almond.value=report?.extraCounts?.['Almond Croissant']??0;inputs.forEach((input,i)=>input.value=report?.counts[i]??'');$('reported-by').value=report?.reporter||'';$('waste-notes').value=report?.notes||'';dirty=false;summary();week();$('waste-state').textContent=report?([...report.counts,...Object.values(report.extraCounts||{})].every(n=>n!==null)?'Complete':'Draft'):'Not recorded';$('waste-status').textContent=blocked?'Storage unavailable. Saving is disabled to protect your data.':report?`Saved report for ${date}.`:'No report saved for this date.';}
+ // Day-by-day cards for the 14 days up to the latest report in the shown week; rate uses the 10 AM preparation for that baking date.
+ function trends(end){
+  let stock={};try{stock=JSON.parse(localStorage.getItem('warren-stock-v1')||'{}')||{};}catch{}
+  const days=Array.from({length:14},(_,i)=>{
+   const date=WastageWeek.offset(end,i-13),report=blocked?null:reports[date];
+   const counts=report?[...report.counts,...Object.values(report.extraCounts||{})].filter(n=>n!==null):[];
+   const total=counts.length?counts.reduce((a,b)=>a+b,0):null;
+   const prep=Object.values(stock).find(record=>record?.automaticDeduction&&record.preparation?.bakingDate===date);
+   const prepared=prep?prep.preparation.amounts.reduce((a,b)=>a+(b||0),0):0;
+   return {date,total,products:counts.length?counts.filter(n=>n>0).length:null,rate:total!==null&&prepared?Math.min(100,total/prepared*100):null};
+  });
+  const first=days.findIndex(day=>day.total!==null);
+  WastageTrends.render($('waste-trends'),days.slice(first<0?7:Math.min(first,7)));
+ }
  let displayedWeek;
  function week(date=current){
   const result=WastageWeek.summarize(date,reports);displayedWeek=result.start;
   const format=date=>new Intl.DateTimeFormat('en-GB',{weekday:'short',day:'numeric',month:'short',year:'numeric',timeZone:'UTC'}).format(new Date(date+'T12:00:00Z'));
   $('waste-week-range').textContent=`${format(result.start)} – ${format(result.end)}`;
   $('waste-week-summary').textContent=blocked?'Saved reports unavailable.':`${result.total===null?'No quantities recorded':result.total.toLocaleString()+' pastries recorded'} · ${result.complete} / 7 complete daily reports. Totals include saved drafts; missing quantities are not counted.`;
+  const limit=result.end<today()?result.end:today();
+  trends(Object.keys(reports).filter(date=>date<=limit).sort().at(-1)||limit);
   $('waste-week-days').replaceChildren();
   const chart=$('waste-chart-bars');chart.replaceChildren();
   const maximum=Math.max(1,...result.days.map(day=>blocked?0:day.total??0));

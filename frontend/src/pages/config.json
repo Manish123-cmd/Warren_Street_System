@@ -64,6 +64,7 @@
       "scripts/weekly-orders.js",
       "scripts/order-receipts.js",
       "scripts/wastage-week.js",
+      "scripts/wastage-trends.js",
       "scripts/wastage.js",
       "scripts/order-alerts.js"
     ]
@@ -79,6 +80,7 @@
       "scripts/order-receipts.js",
       "scripts/sales-summary.js",
       "scripts/wastage-week.js",
+      "scripts/sales-chart.js",
       "scripts/orders.js",
       "scripts/order-alerts.js",
       "scripts/shared-config.js",

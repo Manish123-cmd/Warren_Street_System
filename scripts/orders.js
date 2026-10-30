@@ -55,23 +55,9 @@
    list.append(row);
   });
   if(!data.weekly.length)list.textContent='No orders recorded for this week. Advance orders will appear here when shared.';
-  const chart=$('sales-chart-bars');chart.replaceChildren();
-  const maximum=Math.max(1,...data.products.flatMap(p=>[p.ordered,p.sold||0]));
-  $('sales-coverage').textContent=(unavailable||blocked?'Saved data unavailable. ': '')+`Scale: 0–${maximum} pastries. Sales estimates use saved preparation records for the baking date and reported wastage.`;
-  data.products.forEach(product=>{
-   const group=document.createElement('div');group.className='sales-product';
-   const bars=document.createElement('div');bars.className='sales-pair';
-   [['Ordered',product.ordered,'ordered'],['Estimated sold',product.sold,'sold']].forEach(([label,value,kind])=>{
-    const column=document.createElement('div');column.className='sales-column';
-    const count=document.createElement('span');count.textContent=value===null?'—':value.toLocaleString();
-    const track=document.createElement('div');track.className='sales-track';
-    const bar=document.createElement('div');bar.className='sales-bar '+kind;bar.style.height=`${(value||0)/maximum*100}%`;
-    track.append(bar);column.append(count,track);column.title=`${product.name}: ${label} ${value===null?'unknown':value}`;bars.append(column);
-   });
-   const name=document.createElement('strong');name.textContent=product.name;
-   const coverage=document.createElement('small');coverage.textContent=product.covered?`Sales: ${product.covered}/7 days`:'Sales not yet known';
-   group.append(bars,name,coverage);chart.append(group);
-  });
+  SalesChart.render($('sales-chart-bars'),data.products,{onScale:maximum=>{
+   $('sales-coverage').textContent=(unavailable||blocked?'Saved data unavailable. ': '')+`Scale: 0–${maximum} pastries. Sales estimates use saved preparation records for the baking date and reported wastage.`;
+  }});
  }
  $('orders-prev-week').addEventListener('click',()=>{current=WastageWeek.offset(current,-7);render();});
  $('orders-next-week').addEventListener('click',()=>{current=WastageWeek.offset(current,7);render();});

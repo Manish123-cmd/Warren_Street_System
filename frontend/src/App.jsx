@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { lazy, Suspense, useEffect, useState } from 'react';
 import Sidebar from './components/Sidebar.jsx';
 import Footer from './components/Footer.jsx';
 import Overview from './pages/Overview.jsx';
@@ -14,6 +14,17 @@ const filename = window.location.pathname.split('/').pop() || 'index.html';
 const page = pages.find(page => page.file === filename) || pages[0];
 const Screen = components[page.component];
 let initialization;
+
+// The laser intro plays once per browser session; three.js loads only when it does.
+const Intro = lazy(() => import('./components/Intro.jsx'));
+function shouldPlayIntro() {
+  if (navigator.webdriver || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return false;
+  try {
+    if (sessionStorage.getItem('warren-intro-seen')) return false;
+    sessionStorage.setItem('warren-intro-seen', '1');
+  } catch {}
+  return true;
+}
 
 // Existing controllers initialize only after React has mounted their elements.
 // Full document navigation preserves their event lifetimes and unsaved-change guards.
@@ -35,6 +46,7 @@ function initializeControllers() {
 }
 
 export default function App() {
+  const [intro, setIntro] = useState(shouldPlayIntro);
   useEffect(() => {
     document.body.className = page.bodyClass;
     document.title = page.title;
@@ -58,5 +70,6 @@ export default function App() {
       <Screen />
       <Footer />
     </div>
+    {intro && <Suspense fallback={<div className="intro" />}><Intro onDone={() => setIntro(false)} /></Suspense>}
   </>;
 }
